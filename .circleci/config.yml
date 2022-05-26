@@ -318,7 +318,7 @@ jobs:
             npm run build
             tar -czf artifict.tar.gz dist/* package*
 
-            cd..
+            cd ..
             cp backend/artifict.tar.gz .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
