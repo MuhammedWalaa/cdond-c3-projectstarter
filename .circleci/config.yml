@@ -311,17 +311,13 @@ jobs:
             cd backend
             npm install
             npm run build
-            tar -czf artifict.tar.gz dist/* package*
 
             cd ..
-            cp backend/artifict.tar.gz .circleci/ansible/roles/deploy/files
+            tar -C backend -czvf ~/artifact.tar.gz .
       - run:
           name: Deploy backend
           command: |
-            export TYPEORM_MIGRATIONS_DIR=./migrations
-            export TYPEORM_ENTITIES=.modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./migrations/*.ts
-
+      
             cd .circleci/ansible
             cat inventory.txt
 
