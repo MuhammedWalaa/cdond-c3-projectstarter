@@ -365,10 +365,10 @@ jobs:
               exit 1
             fi
 
-      # - destroy-environment:
-      #     Workflow_ID: "${CIRCLE_WORKFLOW_ID:0:7}"
+      - destroy-environment:
+          Workflow_ID: "${CIRCLE_WORKFLOW_ID:0:7}"
 
-      # - revert-migrations    
+      - revert-migrations    
 
   cloudfront-update:
     docker:
@@ -411,7 +411,7 @@ jobs:
 
             echo STACK names "${STACKS[@]}"
 
-            export OldWorflowID=$( curl --insecure "https://kvdb.io/${KVDB_ID}/old_workflow_id")
+            export OldWorflowID=$( curl --insecure https://kvdb.io/${KVDB_ID}/old_workflow_id)
             echo Old WorkFlow ID : $OldWorflowID
 
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
@@ -447,8 +447,9 @@ workflows:
           requires: [run-migrations]
       - deploy-backend:
           requires: [run-migrations]
-      # - smoke-test:
-      #     requires: [deploy-backend, deploy-frontend]
-      # - cloudfront-update:
-      #     requires: [smoke-test]
-      - cleanup
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]
+      - cloudfront-update:
+          requires: [smoke-test]
+      - cleanup:
+          requires: [cloudfront-update]
