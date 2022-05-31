@@ -434,16 +434,16 @@ jobs:
             export CurrentWorkflowID=${CIRCLE_WORKFLOW_ID:0:7}
                           echo "${OldWorkflowID}"
               echo "${CurrentWorkflowID}"
-            # if [[ "$CurrentWorkflowID" == "$OldWorkflowID" ]]
-            # then
-            #    echo "It's OK, No Previous Stack"
-            # else
-            #   echo "will delete old version"
-            #   echo "${OldWorkflowID}"
-            #   aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
-            #   aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
-            #   aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
-            # fi
+            if [[ "$CurrentWorkflowID" == "$OldWorkflowID" ]]
+            then
+               echo "It's OK, No Previous Stack"
+            else
+              echo "will delete old version"
+              echo "${OldWorkflowID}"
+              aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
+              aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
+              aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
+            fi
 
 workflows:
   default:
