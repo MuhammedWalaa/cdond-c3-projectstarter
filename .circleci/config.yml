@@ -400,7 +400,7 @@ jobs:
             --parameter-overrides workflowid="${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople
             aws cloudfront create-invalidation \
-            --distribution-id E1PO1M2D83H0FG \
+            --distribution-id E2BMZIPJBM1WZY \
             --paths "/*"
       - persist_to_workspace:
           root: .
