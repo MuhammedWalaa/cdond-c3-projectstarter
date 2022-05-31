@@ -387,7 +387,7 @@ jobs:
           name: Retrieve stack workflow id
           command: |
             aws cloudformation list-exports \
-              --query "Exports[?Name==\`workflowid\`].Value" \
+              --query "Exports[?Name==\`WorkflowID\`].Value" \
               --no-paginate \
               --output text > lastFlow.txt
             cat lastFlow.txt
@@ -397,7 +397,7 @@ jobs:
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
             --stack-name InitialStack \
-            --parameter-overrides workflowid="${CIRCLE_WORKFLOW_ID:0:7}" \
+            --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople
             aws cloudfront create-invalidation \
             --distribution-id E2BMZIPJBM1WZY \
