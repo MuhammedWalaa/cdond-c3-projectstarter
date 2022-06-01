@@ -1,0 +1,3 @@
+S3: http://udapeople-dfd1dad.s3.amazonaws.com/index.html
+FrontEnd Cloud Front: http://d38ihv20488zrg.cloudfront.net/
+GitHub: https://github.com/MuhammedWalaa/cdond-c3-projectstarter
